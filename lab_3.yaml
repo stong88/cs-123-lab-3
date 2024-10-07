@@ -17,7 +17,7 @@ forward_command_controller:
       - leg_front_r_1
       - leg_front_r_2
       - leg_front_r_3
-    interface_name: effort
+    interface_name: position
 
 joint_state_broadcaster:
   ros__parameters:

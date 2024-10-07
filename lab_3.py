@@ -119,14 +119,10 @@ class InverseKinematics(Node):
             self.get_logger().info(f'Target EE: {target_ee}, Current EE: {current_ee}, Target Angles: {self.target_joint_positions}, Target Angles to EE: {self.forward_kinematics(*self.target_joint_positions)}, Current Angles: {self.joint_positions}')
 
     def pd_timer_callback(self):
-        if self.joint_positions is not None and self.joint_velocities is not None and self.target_joint_positions is not None:
-            ################################################################################################
-            torques = None
-            # TODO: paste lab 1 pd controller here 
-            ################################################################################################
+        if self.joint_positions is not None:
 
             command_msg = Float64MultiArray()
-            command_msg.data = torques.tolist()
+            command_msg.data = self.target_joint_positions.tolist()
             self.command_publisher.publish(command_msg)
 
 def main():
