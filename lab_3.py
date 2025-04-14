@@ -62,6 +62,7 @@ class InverseKinematics(Node):
             # return the cost and the L1 norm of the error
             ################################################################################################
             # TODO: Implement the cost function
+            # HINT: You can use the * notation on a list to "unpack" a list
             ################################################################################################
             return None, None
 
