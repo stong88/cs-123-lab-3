@@ -84,17 +84,12 @@ class InverseKinematics(Node):
 
             # Update the theta (parameters) using the gradient and the learning rate
             ################################################################################################
-            # TODO: Implement the gradient update
-            # TODO (BONUS): Implement the (quasi-)Newton's method for faster convergence
-            theta -= None
+            # TODO: Implement the gradient update. Use the cost function you implemented, and use tolerance t
+            # to determine if IK has converged
+            # TODO (BONUS): Implement the (quasi-)Newton's method instead of finite differences for faster convergence
             ################################################################################################
 
-            cost, l1 = cost_function(theta)
-            # cost_l.append(cost)
-            if l1.mean() < tolerance:
-                break
-
-        # print(f'Cost: {cost_l}')
+        # print(f'Cost: {cost_l}') # Use to debug to see if you cost function converges within max_iterations
 
         return theta
 
