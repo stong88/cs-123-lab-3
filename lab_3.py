@@ -52,7 +52,7 @@ class InverseKinematics(Node):
 
     def forward_kinematics(self, theta1, theta2, theta3):
         ################################################################################################
-        # TODO: paste lab 2 forward kinematics here
+        # TODO: Compute the forward kinematics for the front right leg (should be easy after lab 2!)
         ################################################################################################
         return
 
