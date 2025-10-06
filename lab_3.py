@@ -3,6 +3,8 @@ from rclpy.node import Node
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Float64MultiArray
 import numpy as np
+import math
+
 np.set_printoptions(precision=3, suppress=True)
 
 Kp = 3
@@ -53,9 +55,7 @@ class InverseKinematics(Node):
     def forward_kinematics(self, theta1, theta2, theta3):
         ################################################################################################
         # TODO: Compute the forward kinematics for the front right leg (should be easy after lab 2!)
-        ################################################################################################
-        import math
-        
+        ################################################################################################        
         def rotation_x(angle):
             # rotation about the x-axis
             return np.array(
