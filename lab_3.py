@@ -58,8 +58,8 @@ class InverseKinematics(Node):
 
     def inverse_kinematics(self, target_ee, initial_guess=[0, 0, 0]):
         def cost_function(theta):
-            # Compute the cost function and the L1 norm of the error
-            # return the cost and the L1 norm of the error
+            # Compute the cost function and the L2 norm of the error
+            # return the cost and the L2 norm of the error
             ################################################################################################
             # TODO: Implement the cost function
             # HINT: You can use the * notation on a list to "unpack" a list
