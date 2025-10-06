@@ -74,12 +74,12 @@ class InverseKinematics(Node):
             ################################################################################################
             # TODO: Implement the gradient computation
             ################################################################################################
-            return
+            return (cost_function(theta + epsilon) - cost_function(theta - epsilon)) / (2 * epsilon)
 
         theta = np.array(initial_guess)
-        learning_rate = None # TODO: Set the learning rate
-        max_iterations = None # TODO: Set the maximum number of iterations
-        tolerance = None # TODO: Set the tolerance for the L1 norm of the error
+        learning_rate = 5 # TODO: Set the learning rate
+        max_iterations = 20 # TODO: Set the maximum number of iterations
+        tolerance = 0.01 # TODO: Set the tolerance for the L1 norm of the error
 
         cost_l = []
         for _ in range(max_iterations):
@@ -91,8 +91,14 @@ class InverseKinematics(Node):
             # to determine if IK has converged
             # TODO (BONUS): Implement the (quasi-)Newton's method instead of finite differences for faster convergence
             ################################################################################################
+            cost, l1 = cost_function(theta)
+            cost_l.append(l1)
+            if cost <= tolerance:
+                break
+            
+            theta -= learning_rate * grad
 
-        # print(f'Cost: {cost_l}') # Use to debug to see if you cost function converges within max_iterations
+        print(f'Cost: {cost_l}') # Use to debug to see if you cost function converges within max_iterations
 
         return theta
 
