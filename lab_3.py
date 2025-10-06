@@ -64,7 +64,10 @@ class InverseKinematics(Node):
             # TODO: Implement the cost function
             # HINT: You can use the * notation on a list to "unpack" a list
             ################################################################################################
-            return None, None
+            current_ee = self.forward_kinematics(*theta)
+            l1 = current_ee - target_ee
+            cost = np.linalg.norm(current_ee - target_ee) ** 2
+            return cost, l1
 
         def gradient(theta, epsilon=1e-3):
             # Compute the gradient of the cost function using finite differences
