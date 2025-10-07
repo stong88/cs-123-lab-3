@@ -168,7 +168,14 @@ class InverseKinematics(Node):
         ################################################################################################
         # TODO: Implement the interpolation function
         ################################################################################################
-        return
+        timesteps = [0, 1, 2, 3]
+        ee_triangle_positions_with_end = np.append(self.ee_triangle_positions, self.ee_triangle_positions[0, :])
+
+        x = np.interp(t, timesteps, ee_triangle_positions_with_end[:, 0])
+        y = np.interp(t, timesteps, ee_triangle_positions_with_end[:, 1])
+        z = np.interp(t, timesteps, ee_triangle_positions_with_end[:, 2])
+        
+        return [x, y, z]
 
     def ik_timer_callback(self):
         if self.joint_positions is not None:
