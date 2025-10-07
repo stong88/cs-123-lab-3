@@ -169,17 +169,29 @@ class InverseKinematics(Node):
         ################################################################################################
         # TODO: Implement the interpolation function
         ################################################################################################
-        timesteps = [0, 1, 2, 3]
-        mod_ee_triangle_positions = np.append(
-            self.ee_triangle_positions,
-            [self.ee_triangle_positions[0, :]],
-            axis=0
-        )
+        mod_t = t % 3
 
-        x = np.interp(t % 3, timesteps, mod_ee_triangle_positions[:, 0])
-        y = np.interp(t % 3, timesteps, mod_ee_triangle_positions[:, 1])
-        z = np.interp(t % 3, timesteps, mod_ee_triangle_positions[:, 2])
+        start_index = None
+        end_index = None
+        percent = None
+
+        if mod_t < 1:  # 0 to 1 (index 0 to index 1)
+            start_index = 0
+            end_index = 1
+            percent = mod_t
+        elif mod_t < 2:  # 1 to 2 (index 1 to index 2)
+            start_index = 1
+            end_index = 2
+            percent = mod_t - 1
+        else:  # 2 to 3 (index 2 to index 0)
+            start_index = 2
+            end_index = 0
+            percent = mod_t - 2
         
+        x = self.ee_triangle_positions[start_index, 0] + (percent * self.ee_triangle_positions[end_index, 0])
+        y = self.ee_triangle_positions[start_index, 1] + (percent * self.ee_triangle_positions[end_index, 1])
+        z = self.ee_triangle_positions[start_index, 2] + (percent * self.ee_triangle_positions[end_index, 2])
+
         return [x, y, z]
 
     def ik_timer_callback(self):
