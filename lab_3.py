@@ -125,7 +125,7 @@ class InverseKinematics(Node):
             # HINT: You can use the * notation on a list to "unpack" a list
             ################################################################################################
             current_ee = self.forward_kinematics(*theta)
-            l1 = np.abs(np.sum(current_ee - target_ee))
+            l1 = np.abs(np.sum(np.array(current_ee) - np.array(target_ee)))
             cost = np.linalg.norm(current_ee - target_ee) ** 2
             return cost, l1
 
