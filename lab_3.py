@@ -101,7 +101,7 @@ class InverseKinematics(Node):
         T_0_1 = translation(0.07500, -0.0445, 0) @ rotation_x(1.57080) @ rotation_z(theta1)
 
         # T_1_2 (leg_front_r_1 to leg_front_r_2)
-        T_1_2 = translation(0.0, 0.0, -0.039) @ rotation_y(-math.pi / 2) @ rotation_z(theta2)
+        T_1_2 = translation(0.0, 0.0, 0.039) @ rotation_y(-math.pi / 2) @ rotation_z(theta2)
 
         # T_2_3 (leg_front_r_2 to leg_front_r_3)
         T_2_3 = translation(0.0, -0.0494, 0.0685) @ rotation_y(math.pi/2) @ rotation_z(theta3)
@@ -140,7 +140,7 @@ class InverseKinematics(Node):
         theta = np.array(initial_guess)
         learning_rate = 5 # TODO: Set the learning rate
         max_iterations = 20 # TODO: Set the maximum number of iterations
-        tolerance = 0.01 # TODO: Set the tolerance for the L1 norm of the error
+        tolerance = 0.001 # TODO: Set the tolerance for the L1 norm of the error
 
         cost_l = []
         for _ in range(max_iterations):
