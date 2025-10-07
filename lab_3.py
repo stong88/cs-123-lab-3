@@ -175,9 +175,9 @@ class InverseKinematics(Node):
             axis=0
         )
 
-        x = np.interp(t, timesteps, mod_ee_triangle_positions[:, 0])
-        y = np.interp(t, timesteps, mod_ee_triangle_positions[:, 1])
-        z = np.interp(t, timesteps, mod_ee_triangle_positions[:, 2])
+        x = np.interp(t % 3, timesteps, mod_ee_triangle_positions[:, 0])
+        y = np.interp(t % 3, timesteps, mod_ee_triangle_positions[:, 1])
+        z = np.interp(t % 3, timesteps, mod_ee_triangle_positions[:, 2])
         
         return [x, y, z]
 
@@ -191,6 +191,7 @@ class InverseKinematics(Node):
             ################################################################################################
             # TODO: Implement the time update
             ################################################################################################
+            self.t += self.ik_timer_period
             
             self.get_logger().info(f'Target EE: {target_ee}, Current EE: {current_ee}, Target Angles: {self.target_joint_positions}, Target Angles to EE: {self.forward_kinematics(*self.target_joint_positions)}, Current Angles: {self.joint_positions}')
 
