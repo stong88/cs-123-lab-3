@@ -188,9 +188,9 @@ class InverseKinematics(Node):
             end_index = 0
             percent = mod_t - 2
         
-        x = self.ee_triangle_positions[start_index, 0] + (percent * self.ee_triangle_positions[end_index, 0])
-        y = self.ee_triangle_positions[start_index, 1] + (percent * self.ee_triangle_positions[end_index, 1])
-        z = self.ee_triangle_positions[start_index, 2] + (percent * self.ee_triangle_positions[end_index, 2])
+        x = self.ee_triangle_positions[start_index, 0] + (percent * (self.ee_triangle_positions[end_index, 0] - self.ee_triangle_positions[start_index, 0]))
+        y = self.ee_triangle_positions[start_index, 1] + (percent * (self.ee_triangle_positions[end_index, 1] - self.ee_triangle_positions[start_index, 1]))
+        z = self.ee_triangle_positions[start_index, 2] + (percent * (self.ee_triangle_positions[end_index, 2] - self.ee_triangle_positions[start_index, 2]))
 
         return [x, y, z]
 
