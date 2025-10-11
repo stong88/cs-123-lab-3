@@ -126,7 +126,7 @@ class InverseKinematics(Node):
             ################################################################################################
             current_ee = self.forward_kinematics(*theta)
             diff = np.array(current_ee) - np.array(target_ee)
-            l1 = np.abs(np.sum(diff))
+            l1 = np.sum(np.abs(diff))
             cost = np.linalg.norm(diff) ** 2
             return cost, l1
 
@@ -154,7 +154,7 @@ class InverseKinematics(Node):
             ################################################################################################
             cost, l1 = cost_function(theta)
             cost_l.append(l1)
-            if cost <= tolerance:
+            if l1 <= tolerance:
                 break
             
             theta -= learning_rate * grad
