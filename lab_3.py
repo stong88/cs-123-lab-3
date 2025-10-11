@@ -135,7 +135,18 @@ class InverseKinematics(Node):
             ################################################################################################
             # TODO: Implement the gradient computation
             ################################################################################################
-            return (cost_function(theta + epsilon)[0] - cost_function(theta - epsilon)[0]) / (2 * epsilon)
+            grad = []
+            
+            for i in range(3):
+                theta_perturbed_pos = np.copy(theta)
+                theta_perturbed_neg = np.copy(theta)
+
+                theta_perturbed_pos[i] += epsilon
+                theta_perturbed_neg[i] -= epsilon
+                grad_i = (cost_function(theta_perturbed_pos)[0] - cost_function(theta_perturbed_neg)[0]) / (2 * epsilon)
+                grad.append(grad_i)
+            
+            return grad
 
         theta = np.array(initial_guess)
         learning_rate = 5 # TODO: Set the learning rate
