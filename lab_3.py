@@ -146,7 +146,7 @@ class InverseKinematics(Node):
                 grad_i = (cost_function(theta_perturbed_pos)[0] - cost_function(theta_perturbed_neg)[0]) / (2 * epsilon)
                 grad.append(grad_i)
             
-            return grad
+            return np.array(grad)
 
         theta = np.array(initial_guess)
         learning_rate = 5 # TODO: Set the learning rate
